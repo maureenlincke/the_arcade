@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@100;300;400;500;700&family=Press+Start+2P&display=swap');
+/* 
+font-family: 'Azeret Mono', monospace;
+font-family: 'Press Start 2P', cursive; 
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #DBCDC6;
+}
+body{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header {
+    position: absolute;
+    top: 2%;
+    
+    background-color: #EAD7D1;
+    padding: 10px;
+    box-shadow: 8px 8px 25px -11px #000000;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
+div.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #EAD7D1; 
+}
+.welcome{
+    font-family: 'Press Start 2P', cursive; 
+    color: #7B506F;
+    background-color: #EAD7D1;
+    padding: 5px;
+}
+.name-input{
+    font-family: 'Azeret Mono', monospace;
+    background-color: #EAD7D1; 
+    padding: 5px; 
+    border: 2px solid #7B506F; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.start-button{
+    font-family: 'Azeret Mono', monospace;
+    color: #EAD7D1;
+    background-color: #7B506F;   
+    margin: 10px;
+    padding:5px 15px; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
+main{
+    position: absolute;
+    top: 25%;
+}
+div.players{
+    font-family: 'Azeret Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+.board {
+    width: 360px;
+    height: 360px;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .cell {
+    flex: 0 0 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .cell:nth-child(3n+2) { 
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+  }
+  .cell:nth-child(n+4):nth-child(-n+6) {
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+  }
+  
+  .cell span {
+    text-transform: uppercase;
+    font-family: monospace;
+    font-size: 3rem;
+  }
+  div.game{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+  }
+  button.game-restart{
+    font-family: 'Azeret Mono', monospace;
+    color: #EAD7D1;
+    background-color: #7B506F;   
+    margin: 10px;
+    padding:5px 15px; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+  }
