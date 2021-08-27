@@ -59,15 +59,16 @@ div.header{
 }
 main{
     position: absolute;
-    top: 25%;
+    top: 23%;
 }
 div.players{
     font-family: 'Azeret Mono', monospace;
+    font-size: 75%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 15px;
+    padding: 10px;
 }
 .board {
     width: 360px;
@@ -105,6 +106,8 @@ div.players{
     align-items: center;
     justify-content: center;
     padding: 15px;
+    font-family: 'Azeret Mono', monospace;
+    font-size: 85%;
   }
   button.game-restart{
     font-family: 'Azeret Mono', monospace;

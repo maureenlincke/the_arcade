@@ -1,11 +1,3 @@
-/*
-To Do
-    - How to target the clicked cell once it has been clicked
-        Why isn't the function working?
-        potentially rework the function for the clicked cell
-    - Commit work and save it to github
-*/
-
 //display whose turn it is
 // const statusDisplay = document.querySelector(".game-status");
 
@@ -40,16 +32,22 @@ function setup(){
         if(Math.random(1) > 0.5){
             currentPlayer = players.computer
         }else{currentPlayer = players.human}
+        
         document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
+        console.log(currentPlayer)
     } else{
         document.querySelector(".O").innerHTML = `${playerFunction()} is O`;
         document.querySelector(".X").innerHTML = `Computer is X`;
+        
         players.computer = "X"
         players.human = "O"
+        
         if(Math.random(1) > 0.5){
             currentPlayer = players.computer
         }else{currentPlayer = players.human}
-        ocument.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
+        
+        document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
+        console.log(currentPlayer)
     }
 }
 
@@ -57,13 +55,11 @@ function setup(){
 // function winningMessage(){`${currentPlayer} has won!`};
 // function drawMessage(){`Game ended in a draw!`};
 // function currentPlayerTurn(){`It's ${currentPlayer}'s turn`};
-// console.log(currentPlayerTurn())
 
 // display the game messages
 // statusDisplay.innerHTML = currentPlayerTurn();
 
 // enter name and have it displayed
-
 function playerFunction(){
     let playerName = document.getElementById("name-input").value;
     return playerName;
@@ -91,14 +87,28 @@ function handlePlayerChange() {
         currentPlayer = "O"
     } else{currentPlayer = "X"}
     statusDisplay.innerHTML = currentPlayerTurn()
+
+    //have JS handle the computer's turn
+    if(currentPlayer === players.computer){
+        computerTurn()
+    }
 }
-
-
+// const winningConditions = [
+//     [0, 1, 2],
+//     [3, 4, 5],
+//     [6, 7, 8],
+//     [0, 3, 6],
+//     [1, 4, 7],
+//     [2, 5, 8],
+//     [0, 4, 8],
+//     [2, 4, 6]
+// ]
 function handleResultValidation() {
     let roundWon = false;
     for(let i = 0; i < 8; i++){
         const winCondition = winningConditions[i]
         let a = gameState[winCondition[0]];
+        //console.log(winCondition[0])0 3 6 0 1 2 0 2 
         let b = gameState[winCondition[1]];
         let c = gameState[winCondition[2]];
         if(a === "" || b === "" || c === ""){
@@ -123,17 +133,28 @@ function handleResultValidation() {
     handlePlayerChange();
 }
 
-
 //handle player turn
 function handleCellClick(clickedCellEvent){
     const clickedCell = clickedCellEvent.target
     const clickedCellIndex = parseInt(clickedCell.getAttribute('cell-index'))
     console.log(clickedCell)
-    // if(gameState[clickedCellIndex] !== "" || !gameActive){
-    //     return;
-    // }
+    if(gameState[clickedCellIndex] !== "" || !gameActive){
+        return;
+    }
     handleCellPlayed(clickedCell, clickedCellIndex);
     handleResultValidation();
+}
+
+//handle computer's turn
+let gameBoard = document.querySelector('.board')
+console.log(gameBoard[0])
+function computerTurn(){
+    for(let i = 0; i < gameBoard.length; i++){
+        //let gameBoardIndex = gameBoard[i]
+    }
+    //gameState[] = currentPlayer
+    clickedCell.innerHTML = currentPlayer
+    handleResultValidation()
 }
 
 //add event listener to the cells
