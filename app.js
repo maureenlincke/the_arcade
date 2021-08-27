@@ -18,27 +18,40 @@ let gameState = ["", "", "", "", "", "", "", "", ""];
 //let the game know whose turn it is
 let players = {
     computer: "",
-    human: "",
-    turn: this.computer
+    human: ""
 }
-let currentPlayer = players.turn
+let currentPlayer
 
 //game setup and player assignment
-function setup(){   
+function setup(){
+    
+    //randomly assign the human and computer X or O
     if(Math.random(1) > 0.5){
+
+        //display who is X and O
         document.querySelector(".X").innerHTML = `${playerFunction()} is X`;
         document.querySelector(".O").innerHTML = `Computer is O`;
+        
+        //assign object values to X and O respectively
         players.computer = "O"
         players.human = "X"
+
+        //assign a random player to be the first random player
+        if(Math.random(1) > 0.5){
+            currentPlayer = players.computer
+        }else{currentPlayer = players.human}
+        document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
     } else{
         document.querySelector(".O").innerHTML = `${playerFunction()} is O`;
         document.querySelector(".X").innerHTML = `Computer is X`;
         players.computer = "X"
         players.human = "O"
+        if(Math.random(1) > 0.5){
+            currentPlayer = players.computer
+        }else{currentPlayer = players.human}
+        ocument.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
     }
 }
-
-//document.querySelector(".O").innerHTML = `Computer is O`;
 
 // game messages for win/draw and current player
 // function winningMessage(){`${currentPlayer} has won!`};
@@ -113,10 +126,9 @@ function handleResultValidation() {
 
 //handle player turn
 function handleCellClick(clickedCellEvent){
-    console.log(clickedCellEvent)
     const clickedCell = clickedCellEvent.target
     const clickedCellIndex = parseInt(clickedCell.getAttribute('cell-index'))
-    console.log(typeof clickedCellIndex)
+    console.log(clickedCell)
     // if(gameState[clickedCellIndex] !== "" || !gameActive){
     //     return;
     // }
@@ -124,10 +136,10 @@ function handleCellClick(clickedCellEvent){
     handleResultValidation();
 }
 
+//add event listener to the cells
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick))
 
 //start the game over without having to reset the browser
-/*
 function handleRestartGame() {
     gameActive = true;
     currentPlayer = computer;
@@ -135,8 +147,6 @@ function handleRestartGame() {
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll(".cell").forEach(cell => cell.innerHTML = "")
 }
-*/
 
-//add event listeners to game cells and restart button
-
-//document.querySelector('.game-restart').addEventListener('click', handleRestartGame)
+//add event listeners to the restart button
+document.querySelector('.game-restart').addEventListener('click', handleRestartGame)
