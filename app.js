@@ -16,24 +16,26 @@ let gameActive = true
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
 //let the game know whose turn it is
-// let computer = "X"
-// let player = "O"
-let currentPlayer = "X"
+let players = {
+    computer: "",
+    human: "",
+    turn: this.computer
+}
+let currentPlayer = players.turn
 
 //game setup and player assignment
 function setup(){   
-    // if(Math.random(1) > 0.5){
-    //     document.querySelector(".X").innerHTML = `${playerFunction()} is X`;
-    //     document.querySelector(".O").innerHTML = `Computer is O`;
-    //     computer = "O"
-    //     player = "X"
-    // } else{
-    //     document.querySelector(".O").innerHTML = `${playerFunction()} is O`;
-    //     document.querySelector(".X").innerHTML = `Computer is X`;
-    //     computer = "X"
-    //     player = "O"
-    // }
-    //document.querySelector(".X").innerHTML = `${playerFunction()} is X`;
+    if(Math.random(1) > 0.5){
+        document.querySelector(".X").innerHTML = `${playerFunction()} is X`;
+        document.querySelector(".O").innerHTML = `Computer is O`;
+        players.computer = "O"
+        players.human = "X"
+    } else{
+        document.querySelector(".O").innerHTML = `${playerFunction()} is O`;
+        document.querySelector(".X").innerHTML = `Computer is X`;
+        players.computer = "X"
+        players.human = "O"
+    }
 }
 
 //document.querySelector(".O").innerHTML = `Computer is O`;
@@ -114,7 +116,7 @@ function handleCellClick(clickedCellEvent){
     console.log(clickedCellEvent)
     const clickedCell = clickedCellEvent.target
     const clickedCellIndex = parseInt(clickedCell.getAttribute('cell-index'))
-    console.log(clickedCellIndex)
+    console.log(typeof clickedCellIndex)
     // if(gameState[clickedCellIndex] !== "" || !gameActive){
     //     return;
     // }
