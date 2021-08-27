@@ -1,3 +1,9 @@
+/*
+To Do
+- Handle computer turn
+    - find a way to return all the board elements in an array (so you can select the empty ones)
+*/
+
 //display whose turn it is
 // const statusDisplay = document.querySelector(".game-status");
 
