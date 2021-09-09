@@ -1,12 +1,3 @@
-/*
-To Do
-- Handle computer turn
-    - find a way to return all the board elements in an array (so you can select the empty ones)
-*/
-
-//display whose turn it is
-const statusDisplay = document.querySelector(".game-status");
-
 //check if the game is still going on
 let gameActive = true
 
@@ -19,6 +10,27 @@ let players = {
     human: ""
 }
 let currentPlayer
+
+//assign winning conditions
+const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
+
+// display the default game messages
+document.querySelector('.game-status').innerHTML = `Welcome to the game :)`;
+
+// enter name and have it displayed
+function playerFunction(){
+    let playerName = document.getElementById("name-input").value;
+    return playerName;
+}
 
 //game setup and player assignment
 function setup(){
@@ -57,32 +69,6 @@ function setup(){
     }
 }
 
-// game messages for win/draw and current player
-function winningMessage(){`${currentPlayer} has won!`};
-function drawMessage(){`Game ended in a draw!`};
-function currentPlayerTurn(){`It's ${currentPlayer}'s turn`};
-
-// display the game messages
-statusDisplay.innerHTML = currentPlayerTurn();
-
-// enter name and have it displayed
-function playerFunction(){
-    let playerName = document.getElementById("name-input").value;
-    return playerName;
-}
-
-
-const winningConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-]
-
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer
     clickedCell.innerHTML = currentPlayer
@@ -92,7 +78,7 @@ function handlePlayerChange() {
     if(currentPlayer === "X"){
         currentPlayer = "O"
     } else{currentPlayer = "X"}
-    statusDisplay.innerHTML = currentPlayerTurn()
+    document.querySelector('.game-status').innerHTML = `It's ${currentPlayer}'s turn`;
 
     //have JS handle the computer's turn
     // if(currentPlayer === players.computer){
@@ -116,13 +102,13 @@ function handleResultValidation() {
         }
     }
     if(roundWon){
-        //statusDisplay.innerHTML = winningMessage();
+        document.querySelector('.game-status').innerHTML = `${currentPlayer} has won!`;
         gameActive = false;
         return
     }
     let roundDraw = !gameState.includes("");
     if(roundDraw){
-        //statusDisplay.innerHTML = drawMessage();
+        document.querySelector('.game-status').innerHTML = `Game ended in a draw!`;
         gameActive = false;
         return;
     }
@@ -159,9 +145,9 @@ document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click'
 //start the game over without having to reset the browser
 function handleRestartGame() {
     gameActive = true;
-    currentPlayer = computer;
+    currentPlayer = setup();
     gameState = ["","","","","","","","",""];
-    statusDisplay.innerHTML = currentPlayerTurn();
+    document.querySelector('.game-status').innerHTML = `Welcome to the game :)`;
     document.querySelectorAll(".cell").forEach(cell => cell.innerHTML = "")
 }
 
