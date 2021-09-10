@@ -51,8 +51,8 @@ function setup(){
             currentPlayer = players.computer
         }else{currentPlayer = players.human}
         
+        //display who goes first
         document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
-        console.log(currentPlayer)
     } else{
         document.querySelector(".O").innerHTML = `${playerFunction()} is O`;
         document.querySelector(".X").innerHTML = `Computer is X`;
@@ -65,7 +65,6 @@ function setup(){
         }else{currentPlayer = players.human}
         
         document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
-        console.log(currentPlayer)
     }
 }
 
@@ -81,9 +80,9 @@ function handlePlayerChange() {
     document.querySelector('.game-status').innerHTML = `It's ${currentPlayer}'s turn`;
 
     //have JS handle the computer's turn
-    // if(currentPlayer === players.computer){
-    //     computerTurn()
-    // }
+    if(currentPlayer === players.computer){
+        computerTurn()
+    }
 }
 
 function handleResultValidation() {
@@ -119,7 +118,6 @@ function handleResultValidation() {
 function handleCellClick(clickedCellEvent){
     const clickedCell = clickedCellEvent.target
     const clickedCellIndex = parseInt(clickedCell.getAttribute('cell-index'))
-    console.log(clickedCell)
     if(gameState[clickedCellIndex] !== "" || !gameActive){
         return;
     }
@@ -127,17 +125,17 @@ function handleCellClick(clickedCellEvent){
     handleResultValidation();
 }
 
-// //handle computer's turn
-// let gameBoard = document.querySelector('.board')
-// console.log(gameBoard[0])
-// function computerTurn(){
-//     for(let i = 0; i < gameBoard.length; i++){
-//         //let gameBoardIndex = gameBoard[i]
-//     }
-//     //gameState[] = currentPlayer
-//     clickedCell.innerHTML = currentPlayer
-//     handleResultValidation()
-// }
+//handle computer's turn
+let gameBoard = document.querySelector('.board')
+console.log(gameBoard[0])
+function computerTurn(){
+    for(let i = 0; i < gameBoard.length; i++){
+        let gameBoardIndex = gameBoard[i]
+    }
+    gameState[] = currentPlayer
+    clickedCell.innerHTML = currentPlayer
+    handleResultValidation()
+}
 
 //add event listener to the cells
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick))
@@ -145,7 +143,8 @@ document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click'
 //start the game over without having to reset the browser
 function handleRestartGame() {
     gameActive = true;
-    currentPlayer = setup();
+    setup();
+    let currentPlayer;
     gameState = ["","","","","","","","",""];
     document.querySelector('.game-status').innerHTML = `Welcome to the game :)`;
     document.querySelectorAll(".cell").forEach(cell => cell.innerHTML = "")
