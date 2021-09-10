@@ -18,7 +18,6 @@ body{
 header {
     position: absolute;
     top: 2%;
-    
     background-color: #EAD7D1;
     padding: 10px;
     box-shadow: 8px 8px 25px -11px #000000;
@@ -41,7 +40,6 @@ div.header{
 .name-input{
     font-family: 'Azeret Mono', monospace;
     background-color: #EAD7D1; 
-    padding: 5px; 
     border: 2px solid #7B506F; 
     -webkit-border-radius: 5px;
     border-radius: 5px;

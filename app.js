@@ -6,10 +6,13 @@ let gameState = ["", "", "", "", "", "", "", "", ""];
 
 //let the game know whose turn it is
 let players = {
-    computer: "",
-    human: ""
+    playerOne: "",
+    playerTwo: ""
 }
 let currentPlayer
+
+//add event listener to the cells
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick))
 
 //assign winning conditions
 const winningConditions = [
@@ -27,9 +30,13 @@ const winningConditions = [
 document.querySelector('.game-status').innerHTML = `Welcome to the game :)`;
 
 // enter name and have it displayed
-function playerFunction(){
-    let playerName = document.getElementById("name-input").value;
-    return playerName;
+function playerOneFunction(){
+    let playerOneName = document.getElementById("player-one").value;
+    return playerOneName;
+}
+function playerTwoFunction(){
+    let playerTwoName = document.getElementById("player-two").value;
+    return playerTwoName;
 }
 
 //game setup and player assignment
@@ -39,30 +46,30 @@ function setup(){
     if(Math.random(1) > 0.5){
 
         //display who is X and O
-        document.querySelector(".X").innerHTML = `${playerFunction()} is X`;
-        document.querySelector(".O").innerHTML = `Computer is O`;
+        document.querySelector(".X").innerHTML = `${playerOneFunction()} is X`;
+        document.querySelector(".O").innerHTML = `${playerTwoFunction()} is O`;
         
         //assign object values to X and O respectively
-        players.computer = "O"
-        players.human = "X"
+        players.playerTwo = "O"
+        players.playerOne = "X"
 
         //assign a random player to be the first random player
         if(Math.random(1) > 0.5){
-            currentPlayer = players.computer
-        }else{currentPlayer = players.human}
+            currentPlayer = players.playerOne
+        }else{currentPlayer = players.playerTwo}
         
         //display who goes first
         document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
     } else{
-        document.querySelector(".O").innerHTML = `${playerFunction()} is O`;
-        document.querySelector(".X").innerHTML = `Computer is X`;
+        document.querySelector(".O").innerHTML = `${playerOneFunction()} is O`;
+        document.querySelector(".X").innerHTML = `${playerTwoFunction()} is X`;
         
-        players.computer = "X"
-        players.human = "O"
+        players.playerTwo = "X"
+        players.playerOne = "O"
         
         if(Math.random(1) > 0.5){
-            currentPlayer = players.computer
-        }else{currentPlayer = players.human}
+            currentPlayer = players.playerOne
+        }else{currentPlayer = players.playerTwo}
         
         document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
     }
@@ -71,6 +78,8 @@ function setup(){
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer
     clickedCell.innerHTML = currentPlayer
+    console.log(document.querySelectorAll('.cell'))
+    console.log(gameState)
 }
 
 function handlePlayerChange() {
@@ -80,9 +89,9 @@ function handlePlayerChange() {
     document.querySelector('.game-status').innerHTML = `It's ${currentPlayer}'s turn`;
 
     //have JS handle the computer's turn
-    if(currentPlayer === players.computer){
-        computerTurn()
-    }
+    // if(currentPlayer === players.computer){
+    //     computerTurn()
+    // }
 }
 
 function handleResultValidation() {
@@ -126,19 +135,16 @@ function handleCellClick(clickedCellEvent){
 }
 
 //handle computer's turn
-let gameBoard = document.querySelector('.board')
-console.log(gameBoard[0])
-function computerTurn(){
-    for(let i = 0; i < gameBoard.length; i++){
-        let gameBoardIndex = gameBoard[i]
-    }
-    gameState[] = currentPlayer
-    clickedCell.innerHTML = currentPlayer
-    handleResultValidation()
-}
-
-//add event listener to the cells
-document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick))
+// function computerTurn(){
+//     const cells = document.querySelectorAll('.cell')
+//     for(let i=0; i < cells.length; i++){
+//         if(cells[i].innerHTML !== ""){continue};
+//         cells.innerHTML = currentPlayer;
+//         gameState[i] = currentPlayer
+//         return
+//     }
+//     handleResultValidation()
+// }
 
 //start the game over without having to reset the browser
 function handleRestartGame() {
