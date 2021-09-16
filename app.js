@@ -27,7 +27,8 @@ const winningConditions = [
 ]
 
 // display the default game messages
-document.querySelector('.game-status').innerHTML = `Welcome to the game :)`;
+const gameMessage = document.querySelector('.game-status') 
+gameMessage.innerHTML = `Welcome to the game :)`;
 
 // enter name and have it displayed
 function playerOneFunction(){
@@ -59,7 +60,7 @@ function setup(){
         }else{currentPlayer = players.playerTwo}
         
         //display who goes first
-        document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
+        gameMessage.innerHTML = `${currentPlayer} goes first!`
     } else{
         document.querySelector(".O").innerHTML = `${playerOneFunction()} is O`;
         document.querySelector(".X").innerHTML = `${playerTwoFunction()} is X`;
@@ -71,22 +72,20 @@ function setup(){
             currentPlayer = players.playerOne
         }else{currentPlayer = players.playerTwo}
         
-        document.querySelector('.game-status').innerHTML = `${currentPlayer} goes first!`
+        gameMessage.innerHTML = `${currentPlayer} goes first!`
     }
 }
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer
     clickedCell.innerHTML = currentPlayer
-    console.log(document.querySelectorAll('.cell'))
-    console.log(gameState)
 }
 
 function handlePlayerChange() {
     if(currentPlayer === "X"){
         currentPlayer = "O"
     } else{currentPlayer = "X"}
-    document.querySelector('.game-status').innerHTML = `It's ${currentPlayer}'s turn`;
+    gameMessage.innerHTML = `It's ${currentPlayer}'s turn`;
 
     //have JS handle the computer's turn
     // if(currentPlayer === players.computer){
@@ -110,13 +109,13 @@ function handleResultValidation() {
         }
     }
     if(roundWon){
-        document.querySelector('.game-status').innerHTML = `${currentPlayer} has won!`;
+        gameMessage.innerHTML = `${currentPlayer} has won!`;
         gameActive = false;
         return
     }
     let roundDraw = !gameState.includes("");
     if(roundDraw){
-        document.querySelector('.game-status').innerHTML = `Game ended in a draw!`;
+        gameMessage.innerHTML = `Game ended in a draw!`;
         gameActive = false;
         return;
     }
@@ -149,10 +148,16 @@ function handleCellClick(clickedCellEvent){
 //start the game over without having to reset the browser
 function handleRestartGame() {
     gameActive = true;
-    setup();
+    document.querySelector(".X").innerHTML = "";
+    document.querySelector(".O").innerHTML = "";
+    let players = {
+        playerOne: "",
+        playerTwo: ""
+    };
     let currentPlayer;
+    setup();
     gameState = ["","","","","","","","",""];
-    document.querySelector('.game-status').innerHTML = `Welcome to the game :)`;
+    gameMessage.innerHTML = `Welcome to the game :)`;
     document.querySelectorAll(".cell").forEach(cell => cell.innerHTML = "")
 }
 
